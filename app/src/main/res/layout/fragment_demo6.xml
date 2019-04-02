@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DemoFrag6">
+
+    <Button
+        android:id="@+id/record"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/record"
+        android:enabled="true"/>
+
+    <Button
+        android:id="@+id/stoprecord"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:enabled="false"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/record"
+        android:background="@drawable/stoprecordoff" />
+
+    <Button
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/voeg_zelf_audio_toe"
+
+        android:id="@+id/toevoegen"
+        android:background="@color/button"
+        android:backgroundTint="@color/buttontint"
+        android:textColor="@color/black"
+
+        />
+
+    <Button
+        android:id="@+id/verwijderen"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="19dp"
+        android:layout_toEndOf="@id/toevoegen"
+        android:background="@color/button"
+        android:backgroundTint="@color/buttontint"
+
+        android:textColor="@color/black"
+        android:text="@string/verwijder"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/soundboardRecyclerView5"
+        android:layout_below="@id/toevoegen"
+    />
+
+
+
+
+
+
+
+</RelativeLayout>

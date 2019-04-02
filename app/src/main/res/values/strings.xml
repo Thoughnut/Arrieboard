@@ -1,0 +1,94 @@
+<resources>
+
+    <string name="app_name">Soundboard</string>
+
+    <string name="main_label">Arrie Soundboard</string>
+    <string name="alle">Alles</string>
+    <string name="arrie">Arrie</string>
+    <string name="jappie">Jappie</string>
+    <string name="tim">Rest</string>
+    <string name="schaal">Schaal</string>
+
+
+    <string-array name="soundNames">
+        <item>Ammo</item>
+        <item>Bakkie Chips</item>
+        <item>Godverdomme</item>
+        <item>Gore aimbot</item>
+        <item>Arrie is kut</item>
+        <item>Arrie klein kiendje</item>
+        <item>Arrie zegt penis</item>
+        <item>Beter kan niet</item>
+        <item>Blokkeren</item>
+        <item>Chime is goed in stelen</item>
+        <item>Hayo is een douchebag</item>
+        <item>Mogool</item>
+        <item>Genieten geblazen</item>
+        <item>Getver daverdown</item>
+        <item>Grasmaaier</item>
+        <item>Rooie inviten</item>
+        <item>Hij noemt zich</item>
+        <item>Welke hoerehond</item>
+        <item>Hoeremoffe</item>
+        <item>Is dat ff balen</item>
+        <item>JOH!!</item>
+        <item>Jongejonge Joosten zeg</item>
+        <item>Jeuk</item>
+        <item>Kutjong</item>
+        <item>Kutjoosten</item>
+        <item>Make every shot count!</item>
+        <item>Met Scope</item>
+        <item>Minkukel!</item>
+        <item>Flikker naar benee!</item>
+        <item>Korte nee</item>
+        <item>Lange nee</item>
+        <item>Niels Roks</item>
+        <item>Oftewel</item>
+        <item>Jappie rapt</item>
+        <item>Penis</item>
+        <item>Primitiveren</item>
+        <item>Profielfoto</item>
+        <item>Rambamja</item>
+        <item>Reeee!</item>
+        <item>Resonantie Hayo</item>
+        <item>Sprogloo een RPG!</item>
+        <item>De ruimte nodig</item>
+        <item>Sint Eustatitoes</item>
+        <item>Sligto houdt van lulkoek</item>
+        <item>Snotverpatje nog aan toe</item>
+        <item>Sodehoere!</item>
+        <item>Treinengek</item>
+        <item>Van Leeuwen</item>
+        <item>Vroemmm!</item>
+        <item>Arries zangtalent</item>
+        <item>Naar de zorg</item>
+        <item>Hayo is niet zwart</item>
+        <item>MOTTO!</item>
+        <item>Sisi Jaja</item>
+        <item>Hayooooooooo!</item>
+        <item>Rotjes in je broek</item>
+        <item>Moedermelk</item>
+        <item>Snapchatkaart</item>
+        <item>Tyf op jasper</item>
+        <item>Ik ben Nico van Egdom</item>
+        <item>ANWEE!!</item>
+        <item>Ian-Rein date</item>
+        <item>Definitie van Kars</item>
+        <item>Civil War</item>
+        <item>Hayo heeft geen tieten</item>
+        <item>Lul</item>
+        <item>Mag ik even naar toilet</item>
+        <item>Kramer is boos</item>
+        <item>Admiraal</item>
+        <item>heel Hayo zingt</item>
+        <item>Jappie Lith</item>
+    </string-array>
+
+    <string name="send">Deel</string>
+    <string name="ringtone">Sla op als..</string>
+    <string name="favoriet">Favoriet</string>
+    <string name="verwijder">verwijder</string>
+    <string name="voeg_zelf_audio_toe">Voeg zelf audio toe</string>
+
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="fill_parent"
+        android:layout_height="400.0px"
+        android:layout_below="@id/tabs" />
+
+    <TextView
+        android:textSize="60.0sp"
+        android:textColor="@color/white"
+        android:id="@+id/cijfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:textSize="25.0sp"
+        android:textColor="@color/black"
+        android:id="@+id/schaaltext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Op de schaal van kut!!"
+        android:layout_below="@id/cijfer"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:textColor="@color/black"
+        android:id="@+id/button"
+        android:background="@color/button"
+        android:layout_width="700.0px"
+        android:layout_height="wrap_content"
+        android:text="Laat Jappie het zeggen!"
+        android:layout_below="@id/schaaltext"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/buttontint" />
+
+</RelativeLayout>

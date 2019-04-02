@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/naamgeving"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/naam"
+        android:textAlignment="center"
+        android:hint="Vul hier de naam in"
+        android:textColor="@color/black"
+        android:background="@drawable/shape"
+
+        />
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/naam"
+        android:id="@+id/save"
+        android:layout_toLeftOf="@id/middle"
+        android:text="Sla op"
+        android:background="@color/button"
+        android:backgroundTint="@color/buttontint"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        />
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/naam"
+        android:id="@+id/cancel"
+        android:layout_toRightOf="@id/middle"
+        android:layout_marginLeft="10dp"
+        android:text="Annuleer"
+        android:layout_marginTop="15dp"
+        android:background="@color/button"
+        android:backgroundTint="@color/buttontint"
+
+        android:textColor="@color/black"/>
+
+
+
+
+
+
+
+
+
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/naam"
+        android:id="@+id/middle"/>
+
+
+
+</RelativeLayout>
