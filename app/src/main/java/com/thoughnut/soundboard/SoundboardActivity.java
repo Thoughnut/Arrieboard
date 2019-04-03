@@ -42,6 +42,8 @@ public class SoundboardActivity extends AppCompatActivity{
     private ViewPagerAdapter adapter;
 
 
+    //Refresh
+    private Button refresh;
 
     Toolbar toolbar;
     View v;
@@ -133,13 +135,30 @@ public class SoundboardActivity extends AppCompatActivity{
         button = (Button) findViewById(R.id.button);
 
 
-
+//refresh
+        refresh = findViewById(R.id.refresh);
 
         mLayout = findViewById(R.id.activity_soundboard);
 
         toolbar = (Toolbar) findViewById(R.id.soundboard_toolbar);
-
         setSupportActionBar(toolbar);
+
+
+        //refresh
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+
+            }
+        });
+
+
+
+
         //geheim
 
 
@@ -149,6 +168,7 @@ public class SoundboardActivity extends AppCompatActivity{
                 System.out.println("het werkt");
                 videoView.setVisibility(v.VISIBLE);
                 tabLayout.setVisibility(v.GONE);
+                refresh.setVisibility(v.GONE);
                 videoView.setVideoURI(video);
                 videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
@@ -179,6 +199,7 @@ public class SoundboardActivity extends AppCompatActivity{
                     public void onCompletion(MediaPlayer mp) {
                         videoView.setVisibility(View.GONE);
                         tabLayout.setVisibility(View.VISIBLE);
+                        refresh.setVisibility(View.VISIBLE);
                     }
                 });
 

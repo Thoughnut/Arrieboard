@@ -3,6 +3,7 @@ package com.thoughnut.soundboard;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -121,94 +123,6 @@ public class EventHandlerClass {
                         final Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
                         shareIntent.setType("audio/mp3");
-                        v.getContext().startActivity(Intent.createChooser(shareIntent, "Deel geluid via..."));
-
-
-                    }
-                    if(item.getItemId() == R.id.ringtone){
-                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), AlertDialog.THEME_HOLO_LIGHT);
-                        builder.setTitle("Stel in als...");
-                        builder.setItems(new CharSequence[]{"Ringtone", "Notificatie", "Alarm (Werkt niet op elke mobiel)"}, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                switch(which){
-                                    case 0:
-                                        changeSysAudio(v, fileName, file, 1);
-                                        break;
-                                    case 1:
-                                        changeSysAudio(v, fileName, file, 2);
-                                        break;
-                                    case 2:
-                                        changeSysAudio(v, fileName, file, 3);
-                                        break;
-                                }
-
-                            }
-                        });
-
-                        builder.create();
-                        builder.show();
-
-                    }
-                }
-
-
-                return true;
-            }
-        });
-        popup.show();
-
-    }
-    public static void popupM2(final View v, final SoundObject2 soundObject){
-        PopupMenu popup = new PopupMenu(v.getContext(), v);
-        popup.getMenuInflater().inflate(R.menu.longclick, popup.getMenu());
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.send  || item.getItemId() == R.id.ringtone) {
-
-                    final String fileName = soundObject.getItemName() + ".mp3";
-
-
-                    File storage = Environment.getExternalStorageDirectory();
-                    File directory = new File(storage.getAbsolutePath() + "/Download/Geluiden/");
-                    directory.mkdirs();
-                    final File file = new File(directory, fileName);
-                    String s = soundObject.getItemName();
-                    File str = new File(Environment.getExternalStorageDirectory().toString() + "/eigengeluiden/" + s);
-                    source = str;
-                    target = directory;
-
-                    try {
-                        InputStream in = new FileInputStream(source);
-                        OutputStream out = new FileOutputStream(target);
-
-                        // Copy the bits from instream to outstream
-                        byte[] buf = new byte[1024];
-                        int len;
-
-                        while ((len = in.read(buf)) > 0) {
-                            out.write(buf, 0, len);
-                        }
-
-                        in.close();
-                        out.close();
-
-                    } catch (IOException e){
-                        Log.e(LOG_TAG, "Failed to save file: " + e.getMessage());
-                    }
-
-                    if(item.getItemId() ==R.id.send){
-                        final String AUTHORITY = v.getContext().getPackageName()+ ".fileprovider";
-                        Uri contentUri;
-
-                        contentUri = (Uri) FileProvider.getUriForFile(v.getContext(), AUTHORITY, file);
-                        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-                        shareIntent.setType("audio/mp3");
-
                         v.getContext().startActivity(Intent.createChooser(shareIntent, "Deel geluid via..."));
 
 

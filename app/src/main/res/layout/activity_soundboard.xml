@@ -16,6 +16,15 @@
 
         />
 
+    <Button
+        android:layout_marginTop="10px"
+        android:layout_marginRight="20px"
+        android:layout_width="120px"
+        android:layout_height="130px"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/refresh"
+        android:id="@+id/refresh"/>
+
 
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"

@@ -57,8 +57,6 @@ public class SoundboardRecyclerAdapter2 extends RecyclerView.Adapter<SoundboardR
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
-                EventHandlerClass.popupM2(v, object);
                 return true;
             }
         });

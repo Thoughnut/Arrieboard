@@ -23,6 +23,7 @@ public class Glitch extends Activity{
     private List<String> nameList;
     private ArrayList<SoundObject> soundList = new ArrayList<>();
     private VideoView videoView;
+    private MediaPlayer mediaPlayer = new MediaPlayer();
     @Override
     public void onBackPressed() {
 
@@ -64,6 +65,8 @@ public class Glitch extends Activity{
             public void onCompletion(MediaPlayer mp) {
                 videoView.setVisibility(View.GONE);
                 myrecyclerview.setVisibility(View.VISIBLE);
+                mediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.arriesoundboard);
+                mediaPlayer.start();
             }
         });
 
