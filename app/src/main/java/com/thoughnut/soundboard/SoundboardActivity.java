@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.File;
@@ -43,7 +46,7 @@ public class SoundboardActivity extends AppCompatActivity{
 
 
     //Refresh
-    private Button refresh;
+    private static Button refresh;
 
     Toolbar toolbar;
     View v;
@@ -149,7 +152,14 @@ public class SoundboardActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
+                if(isConnectingToInternet()){
+                    new DownloadTask(SoundboardActivity.this, refresh, Utils.darrie);
+                    new DownloadTask(SoundboardActivity.this, refresh, Utils.djappie);
+                    new DownloadTask(SoundboardActivity.this, refresh, Utils.drest);
 
+                }else{
+                    Toast.makeText(getBaseContext(), "Geen internet", Toast.LENGTH_SHORT).show();
+                }
 
 
 
@@ -281,5 +291,14 @@ public class SoundboardActivity extends AppCompatActivity{
         VP.setAdapter(adapter);
     }
 
-
+    //Check if internet is present or not
+    private boolean isConnectingToInternet() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager
+                .getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            return false;
+    }
 }
