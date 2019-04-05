@@ -59,9 +59,10 @@ public class DemoFrag2 extends Fragment {
         Log.d("Files", "Path: " + path);
         File directory = new File(path);
         File[] files = directory.listFiles();
-        Arrays.sort(files);
+
 
         if (files != null && files.length > 0) {
+            Arrays.sort(files);
             for (int i = 0; i < files.length; i++) {
                 Log.d("Files", "FileName:" + files[i].getName());
                 //vind substring
