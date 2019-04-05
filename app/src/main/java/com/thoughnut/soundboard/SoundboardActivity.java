@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -47,6 +48,10 @@ public class SoundboardActivity extends AppCompatActivity{
 
     //Refresh
     private static Button refresh;
+    private String zip = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/";
+    private String unzipa = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/arrie";
+    private String unzipj = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/jappie";
+    private String unzipr = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/rest";
 
     Toolbar toolbar;
     View v;
@@ -92,7 +97,7 @@ public class SoundboardActivity extends AppCompatActivity{
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         setupVPager(viewPager);
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         mLayout = findViewById(R.id.activity_soundboard);
@@ -115,7 +120,7 @@ public class SoundboardActivity extends AppCompatActivity{
 
 
 //video
-        videoView = (VideoView) findViewById(R.id.video);
+        videoView = findViewById(R.id.video);
         final Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.gucci);
         videoView.setVisibility(View.GONE);
 //videoview
@@ -129,13 +134,13 @@ public class SoundboardActivity extends AppCompatActivity{
 
 
         //schaal van kut
-        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar = findViewById(R.id.seekBar);
 
-        cijfer = (TextView) findViewById(R.id.cijfer);
+        cijfer = findViewById(R.id.cijfer);
 
-        schaaltext = (TextView) findViewById(R.id.schaaltext);
+        schaaltext = findViewById(R.id.schaaltext);
 
-        button = (Button) findViewById(R.id.button);
+        button = findViewById(R.id.button);
 
 
 //refresh
@@ -143,7 +148,7 @@ public class SoundboardActivity extends AppCompatActivity{
 
         mLayout = findViewById(R.id.activity_soundboard);
 
-        toolbar = (Toolbar) findViewById(R.id.soundboard_toolbar);
+        toolbar = findViewById(R.id.soundboard_toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -153,10 +158,20 @@ public class SoundboardActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 if(isConnectingToInternet()){
+                    //verwijder oude bestanden
+                    File dir = new File(Environment.getExternalStorageDirectory().toString()+"/Arrieboard Downloads/");
+                    if (dir.isDirectory())
+                    {
+                        String[] children = dir.list();
+                        for (int i = 0; i < children.length; i++)
+                        {
+                            new File(dir, children[i]).delete();
+                        }
+                    }
+                    //download nieuwe bestanden
                     new DownloadTask(SoundboardActivity.this, refresh, Utils.darrie);
                     new DownloadTask(SoundboardActivity.this, refresh, Utils.djappie);
                     new DownloadTask(SoundboardActivity.this, refresh, Utils.drest);
-
                 }else{
                     Toast.makeText(getBaseContext(), "Geen internet", Toast.LENGTH_SHORT).show();
                 }
@@ -176,9 +191,9 @@ public class SoundboardActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 System.out.println("het werkt");
-                videoView.setVisibility(v.VISIBLE);
-                tabLayout.setVisibility(v.GONE);
-                refresh.setVisibility(v.GONE);
+                videoView.setVisibility(View.VISIBLE);
+                tabLayout.setVisibility(View.GONE);
+                refresh.setVisibility(View.GONE);
                 videoView.setVideoURI(video);
                 videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
@@ -285,20 +300,18 @@ public class SoundboardActivity extends AppCompatActivity{
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new DemoFrag1());
         adapter.addFrag(new DemoFrag2());
+        adapter.addFrag(new DemoFrag3());
         adapter.addFrag(new DemoFrag4());
         adapter.addFrag(new DemoFrag5());
-        adapter.addFrag(new DemoFrag6());
         VP.setAdapter(adapter);
     }
+
 
     //Check if internet is present or not
     private boolean isConnectingToInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager
                 .getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            return true;
-        else
-            return false;
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

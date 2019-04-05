@@ -2,6 +2,7 @@ package com.thoughnut.soundboard;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 public class SoundboardRecyclerAdapter2 extends RecyclerView.Adapter<SoundboardRecyclerAdapter2.SoundboardViewHolder>{
 
     ArrayList<SoundObject2> soundObjects;
-    Context mContext;
+    private Context mContext;
+    String[] total = {""};
 
     public SoundboardRecyclerAdapter2(Context mContext, ArrayList<SoundObject2> soundObjects){
 
@@ -33,7 +35,7 @@ public class SoundboardRecyclerAdapter2 extends RecyclerView.Adapter<SoundboardR
     }
 
     @Override
-    public void onBindViewHolder(SoundboardViewHolder holder, int position) {
+    public void onBindViewHolder(final SoundboardViewHolder holder, int position) {
 
 
         final SoundObject2 object = soundObjects.get(position);
@@ -48,8 +50,31 @@ public class SoundboardRecyclerAdapter2 extends RecyclerView.Adapter<SoundboardR
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int pos = holder.getLayoutPosition();
+                String p = total[0];
+                String glitchstr = "831317";
+
+                if(pos ==3) {
+                    total[0] = p + "3";
+                }
+                if(pos==8){
+                    total[0] = p + "8";
+                }
+                if(pos==13){
+                    total[0] = p + "13";
+                }
+                if(pos==17){
+                    total[0] = p + "17";
+                }
+                if (total[0].contains(glitchstr)){
+                    total[0] = "";
+                    //start glitchsequence
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, Glitch.class);
+                    context.startActivity(intent);
 
 
+                }
                 EventHandlerClass.startMediaPlayer2(v, soundID);
                 notifyDataSetChanged();
             }
@@ -57,6 +82,7 @@ public class SoundboardRecyclerAdapter2 extends RecyclerView.Adapter<SoundboardR
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                EventHandlerClass.popupM2(v, object);
                 return true;
             }
         });
@@ -80,7 +106,7 @@ public class SoundboardRecyclerAdapter2 extends RecyclerView.Adapter<SoundboardR
             super(itemView);
 
 
-            itemTextView = (TextView) itemView.findViewById(R.id.textViewItem);
+            itemTextView = itemView.findViewById(R.id.textViewItem);
         }
     }
 }

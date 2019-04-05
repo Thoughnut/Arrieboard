@@ -22,7 +22,8 @@ import java.util.Arrays;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DemoFrag2 extends Fragment {
+public class DemoFrag3 extends Fragment {
+
     private static Context context;
     private  static ArrayList<SoundObject2> soundList = new ArrayList<>();
     public static SoundObject2[] soundItems;
@@ -30,7 +31,7 @@ public class DemoFrag2 extends Fragment {
     public static RecyclerView recyclerView;
 
 
-    public DemoFrag2() {
+    public DemoFrag3() {
         // Required empty public constructor
     }
 
@@ -39,23 +40,21 @@ public class DemoFrag2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_demo2, container, false);
-        recyclerView = view.findViewById(R.id.soundboardRecyclerView2);
+        View view = inflater.inflate(R.layout.fragment_demo4, container, false);
+
+        recyclerView = view.findViewById(R.id.soundboardRecyclerView4);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         recyclerView.setAdapter(adapter);
-        hayojappie();
-
-
+        hayorest();
 
         return view;
     }
 
-    public static void hayojappie() {
-
+    public static void hayorest(){
         soundList.clear();
 
 
-        String path = Environment.getExternalStorageDirectory().toString() + "/Arrieboard Downloads/jappie/";
+        String path = Environment.getExternalStorageDirectory().toString() + "/Arrieboard Downloads/rest/";
         Log.d("Files", "Path: " + path);
         File directory = new File(path);
         File[] files = directory.listFiles();
@@ -92,6 +91,6 @@ public class DemoFrag2 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-    }
 
+    }
 }

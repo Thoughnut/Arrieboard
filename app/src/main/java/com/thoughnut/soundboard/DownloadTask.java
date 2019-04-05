@@ -10,9 +10,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -23,6 +21,13 @@ public class DownloadTask {
     private Button buttonText;
     private String downloadUrl = "", downloadFileName = "";
     private String[] filename= {"darrie.zip","djappie.zip","drest.zip"};
+
+    //ziplocaties
+    private String zip = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/";
+    private String unzipa = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/arrie";
+    private String unzipj = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/jappie";
+    private String unzipr = Environment.getExternalStorageDirectory().getAbsolutePath() +"/Arrieboard Downloads/rest";
+
 
     public DownloadTask(Context context, Button buttonText, String downloadUrl) {
         this.context = context;
@@ -62,7 +67,24 @@ public class DownloadTask {
             try {
                 if (outputFile != null) {
                     buttonText.setEnabled(true);
-                    Toast.makeText(context, R.string.downloadCompleted, Toast.LENGTH_SHORT).show();//If Download completed then change button text
+
+                    //zorg dat hierna wordt geunzipped
+                    if(downloadUrl.equals(Utils.darrie)) {
+                    if(FileHelper.unzip(zip+"darrie.zip",unzipa)){ }
+                        Toast.makeText(context, R.string.downloadCompleteda, Toast.LENGTH_SHORT).show();//If Download completed then change button text
+                        DemoFrag1.hayoarrie();
+                    }
+                    if(downloadUrl.equals(Utils.djappie)) {
+                        if(FileHelper.unzip(zip+"djappie.zip",unzipj)){ }
+                        Toast.makeText(context, R.string.downloadCompletedj, Toast.LENGTH_SHORT).show();//If Download completed then change button text
+                        DemoFrag2.hayojappie();
+                    }
+                    if(downloadUrl.equals(Utils.drest)) {
+                        if(FileHelper.unzip(zip+"drest.zip",unzipr)){ }
+                        Toast.makeText(context, R.string.downloadCompletedr, Toast.LENGTH_SHORT).show();//If Download completed then change button text
+                        DemoFrag3.hayorest();
+                    }
+
                 } else {
                     Toast.makeText(context, R.string.downloadFailed, Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {

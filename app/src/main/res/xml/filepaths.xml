@@ -4,4 +4,8 @@
     <!-- RECOMMENDED: Only edit the path tag -->
 
     <external-path name="soundboard" path="Download/Geluiden/"/>
+    <external-path name="customa" path="Arrieboard Downloads/arrie/"/>
+    <external-path name="customj" path="Arrieboard Downloads/jappie/"/>
+    <external-path name="customr" path="Arrieboard Downloads/rest/"/>
+    <external-path name="eigen" path="eigengeluiden/"/>
 </paths>

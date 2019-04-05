@@ -1,7 +1,6 @@
 package com.thoughnut.soundboard;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -160,7 +159,7 @@ public class FileChooser extends ListActivity {
 
 
 
-        DemoFrag6.hayotje();
+        DemoFrag5.hayotje();
         this.finish();
 
 

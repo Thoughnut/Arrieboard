@@ -3,25 +3,20 @@ package com.thoughnut.soundboard;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
-
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -119,7 +114,7 @@ public class EventHandlerClass {
                         final String AUTHORITY = v.getContext().getPackageName()+ ".fileprovider";
                         Uri contentUri;
 
-                        contentUri = (Uri) FileProvider.getUriForFile(v.getContext(), AUTHORITY, file);
+                        contentUri = FileProvider.getUriForFile(v.getContext(), AUTHORITY, file);
                         final Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
                         shareIntent.setType("audio/mp3");
@@ -162,6 +157,85 @@ public class EventHandlerClass {
         popup.show();
 
     }
+
+    public static void popupM2(final View v, final SoundObject2 soundObject){
+        PopupMenu popup = new PopupMenu(v.getContext(), v);
+        popup.getMenuInflater().inflate(R.menu.longclick, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.send  || item.getItemId() == R.id.ringtone) {
+
+
+                    //alleen naam
+                    final String ext = soundObject.getFilePath().substring(soundObject.getFilePath().lastIndexOf("."));
+
+                    final String fileName = soundObject.getItemName() + ext;
+
+                    System.out.println(ext);
+
+                    //locatie
+                    final int sub = fileName.length();
+                    System.out.println(sub + "        " + fileName);
+                    final String dir = soundObject.getFilePath();
+
+                    final String directory = dir.substring(0,dir.length()-fileName.length());
+                    System.out.println(directory);
+
+
+                    final File file = new File(directory, fileName);
+
+
+                    if(item.getItemId() ==R.id.send){
+                        final String AUTHORITY = v.getContext().getPackageName()+ ".fileprovider";
+                        Uri contentUri;
+
+                        contentUri = FileProvider.getUriForFile(v.getContext(), AUTHORITY, file);
+                        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                        shareIntent.setType("audio/*");
+                        v.getContext().startActivity(Intent.createChooser(shareIntent, "Deel geluid via..."));
+
+
+                    }
+                    if(item.getItemId() == R.id.ringtone){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), AlertDialog.THEME_HOLO_LIGHT);
+                        builder.setTitle("Stel in als...");
+                        builder.setItems(new CharSequence[]{"Ringtone", "Notificatie", "Alarm (Werkt niet op elke mobiel)"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                switch(which){
+                                    case 0:
+                                        changeSysAudio(v, fileName, file, 1);
+                                        break;
+                                    case 1:
+                                        changeSysAudio(v, fileName, file, 2);
+                                        break;
+                                    case 2:
+                                        changeSysAudio(v, fileName, file, 3);
+                                        break;
+                                }
+
+                            }
+                        });
+
+                        builder.create();
+                        builder.show();
+
+                    }
+                }
+
+
+                return true;
+            }
+        });
+        popup.show();
+
+    }
+
+
     private static void changeSysAudio(View v, String fileName, File file, int action) {
         try {
 

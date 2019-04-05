@@ -5,12 +5,14 @@ import android.net.Uri;
 class SoundObject2 {
     private String itemName;
     private Uri itemID;
+    private String itemPath;
 
 
-    public SoundObject2(String itemName, Uri itemID){
+    public SoundObject2(String itemName, Uri itemID, String itemPath){
 
         this.itemName = itemName;
         this.itemID = itemID;
+        this.itemPath = itemPath;
     }
 
     public String getItemName(){
@@ -21,6 +23,10 @@ class SoundObject2 {
     public Uri getItemID(){
 
         return itemID;
+    }
+
+    public String getFilePath(){
+        return itemPath;
     }
 
 }
