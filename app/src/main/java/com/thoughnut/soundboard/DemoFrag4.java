@@ -14,6 +14,7 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,20 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.coremedia.iso.boxes.Container;
+import com.googlecode.mp4parser.authoring.Movie;
+import com.googlecode.mp4parser.authoring.Track;
+import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.squareup.seismic.ShakeDetector;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class DemoFrag4 extends Fragment implements ShakeDetector.Listener {
@@ -124,6 +137,30 @@ public class DemoFrag4 extends Fragment implements ShakeDetector.Listener {
     }
 
     public void jappieclick2(View v){
+        button.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //getallen
+                final int voorkomma;
+                final int nakomma;
+                voorkomma = seekBar.getProgress()/10;
+                nakomma = (int) Math.floor(seekBar.getProgress())-(seekBar.getProgress()/10)*10;
+
+
+                String[] source;
+                String target;
+
+
+
+
+                mergeMediaFiles(true, ,);
+                return true;
+            }
+        });
+
+
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,6 +226,36 @@ public class DemoFrag4 extends Fragment implements ShakeDetector.Listener {
         });
     }
 
+    public static boolean mergeMediaFiles(boolean isAudio, String[] sourceFiles, String targetFile) {
+        try {
+            String mediaKey = isAudio ? "soun" : "vide";
+            List<Movie> listMovies = new ArrayList<>();
+            for (String filename : sourceFiles) {
+                listMovies.add(MovieCreator.build(filename));
+            }
+            List<Track> listTracks = new LinkedList<>();
+            for (Movie movie : listMovies) {
+                for (Track track : movie.getTracks()) {
+                    if (track.getHandler().equals(mediaKey)) {
+                        listTracks.add(track);
+                    }
+                }
+            }
+            Movie outputMovie = new Movie();
+            if (!listTracks.isEmpty()) {
+                outputMovie.addTrack(new AppendTrack(listTracks.toArray(new Track[listTracks.size()])));
+            }
+            Container container = new DefaultMp4Builder().build(outputMovie);
+            FileChannel fileChannel = new RandomAccessFile(String.format(targetFile), "rws").getChannel();
+            container.writeContainer(fileChannel);
+            fileChannel.close();
+            return true;
+        }
+        catch (IOException e) {
+            Log.e("MYTAG", "Error merging media files. exception: "+e.getMessage());
+            return false;
+        }
+    }
     @Override
     public void hearShake(){
         //wat moet er gebeuren als je schud

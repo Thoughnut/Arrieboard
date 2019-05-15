@@ -7,7 +7,7 @@
         android:id="@+id/seekBar"
         android:layout_width="fill_parent"
         android:layout_height="400.0px"
-        android:layout_below="@id/tabs" />
+         />
 
     <TextView
         android:textSize="60.0sp"
