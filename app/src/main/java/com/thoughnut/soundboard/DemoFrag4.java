@@ -153,7 +153,7 @@ public class DemoFrag4 extends Fragment implements ShakeDetector.Listener {
 
 
 
-                mergeMediaFiles(true, ,);
+            //    mergeMediaFiles(true, ,);
                 return true;
             }
         });
